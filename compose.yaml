@@ -1,0 +1,37 @@
+# WIP: Experimental
+
+version: '3.8'
+
+services:
+  orchestrator:
+    image: ironhide
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8085:8085"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/audit_db
+      - SPRING_DATASOURCE_USERNAME=ironhide
+      - SPRING_DATASOURCE_PASSWORD=CSzuvcUEoc
+      - LOGGING_FILE_NAME=/app/logs/Main.log
+      - SERVER_TOMCAT_ACCESS_LOG_DIRECTORY=/app/logs/accesslogs
+    depends_on:
+      - postgres
+    volumes:
+      - logs:/app/logs
+
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=audit_db
+      - POSTGRES_USER=ironhide
+      - POSTGRES_PASSWORD=CSzuvcUEoc
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  logs:
+  postgres_data:
+  redis_data:
