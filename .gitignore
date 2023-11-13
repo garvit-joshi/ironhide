@@ -39,6 +39,7 @@ build/
 # Log file
 *.log
 /log.file_IS_UNDEFINED
+*.file_IS_UNDEFINED
 
 
 # BlueJ files

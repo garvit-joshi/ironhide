@@ -1,6 +1,7 @@
 CREATE TABLE audit
 (
     id            BIGSERIAL PRIMARY KEY,
+    uuid          VARCHAR(128) NOT NULL,
     application   VARCHAR(32) NOT NULL,
     caller        VARCHAR(32) NOT NULL,
     audit_context VARCHAR(8)  NOT NULL,

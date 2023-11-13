@@ -1,0 +1,32 @@
+<configuration>
+    <springProperty scope="context" name="log.file" source="logging.file.name"/>
+    <conversionRule conversionWord="customThread"
+                    converterClass="org.garvit.IronHide.utilities.CustomThreadConverter"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%customThread] %-5level %logger{36}(%line\) - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="APP_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.file}</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${log.file}.%d{yyyy-MM-dd}.gz</fileNamePattern>
+
+            <!-- keep 3 days' worth of history capped at 3GB total size -->
+            <maxHistory>3</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%customThread] %-5level %logger{36}(%line\) - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="APP_FILE"/>
+    </root>
+</configuration>
