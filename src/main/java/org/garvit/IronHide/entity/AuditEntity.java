@@ -25,7 +25,7 @@ public class AuditEntity {
   @Column(name = "id")
   private Long id;
 
-  @Column(name = "uuid", nullable = false, length = 128)
+  @Column(name = "uuid", nullable = false, length = 128, unique = true)
   private String uuid;
 
   @Column(name = "application", nullable = false, length = 32)
