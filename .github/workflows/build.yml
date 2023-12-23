@@ -38,7 +38,7 @@ jobs:
                     ./mvnw --version
                     ./mvnw -B package --file pom.xml -P local
             -   name: Upload JAR
-                uses: actions/upload-artifact@v3
+                uses: actions/upload-artifact@v4
                 continue-on-error: true
                 with:
                     name: IronHideBUILD
